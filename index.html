@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutuja Vilas Jadhav | Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+        rel="stylesheet">
+
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: 'rgb(var(--color-bg) / <alpha-value>)',
+                        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+                        accent2: 'rgb(var(--color-accent2) / <alpha-value>)',
+                        card: 'rgb(var(--color-card) / <alpha-value>)',
+                        bordercolor: 'rgb(var(--color-border) / <alpha-value>)',
+                        textcolor: 'rgb(var(--color-text) / <alpha-value>)',
+                        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+                    },
+                    fontFamily: {
+                        sans: ['"DM Sans"', 'sans-serif'],
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 90s linear infinite',
+                        'bounce-down': 'bounce-down 2s infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        'bounce-down': {
+                            '0%, 100%': { transform: 'translateY(-25%)', animationTimingFunction: 'cubic-bezier(0.8,0,1,1)' },
+                            '50%': { transform: 'translateY(0)', animationTimingFunction: 'cubic-bezier(0,0,0.2,1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg: #0A0A0A;
+            --accent: #00FFB2;
+            --accent2: #FF4500;
+            --card: #111111;
+            --border: #1E1E1E;
+            --text: #E8E8E8;
+            --muted: #555555;
+            
+            --color-bg: 10 10 10;
+            --color-accent: 0 255 178;
+            --color-accent2: 255 69 0;
+            --color-card: 17 17 17;
+            --color-border: 30 30 30;
+            --color-text: 232 232 232;
+            --color-muted: 85 85 85;
+        }
+
+        .light-theme {
+            --bg: #F4F4F5;
+            --accent: #00B884;
+            --accent2: #E63E00;
+            --card: #FFFFFF;
+            --border: #E4E4E7;
+            --text: #18181B;
+            --muted: #71717A;
+            
+            --color-bg: 244 244 245;
+            --color-accent: 0 184 132;
+            --color-accent2: 230 62 0;
+            --color-card: 255 255 255;
+            --color-border: 228 228 231;
+            --color-text: 24 24 27;
+            --color-muted: 113 113 122;
+        }
+
+        .light-theme .noise-overlay {
+            opacity: 0.03;
+            filter: invert(1);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            cursor: none;
+            /* Hide default cursor */
+        }
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.04;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .custom-cursor.hovering {
+            width: 40px;
+            height: 40px;
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 10px var(--accent) inset, 0 0 10px var(--accent);
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Gradient Mesh */
+        .hero-gradient {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background: radial-gradient(circle at 30% 30%, rgba(var(--color-accent), 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(var(--color-accent2), 0.1) 0%, transparent 50%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Typing cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Navbar Glass */
+        nav {
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background-color: rgba(var(--color-bg), 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Nav Links */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--accent);
+        }
+
+        /* Marquee */
+        .marquee-container {
+            display: flex;
+            width: 200%;
+        }
+
+        /* Magnetic Button */
+        .magnetic-btn {
+            display: inline-block;
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Skill Cards */
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            box-shadow: 0 0 20px rgba(var(--color-accent), 0.3);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* Timeline */
+        .timeline-dot {
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        /* Project Cards */
+        .project-card {
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card.featured:hover {
+            box-shadow: 0 15px 30px rgba(var(--color-accent), 0.15);
+        }
+
+        .project-card.secondary:hover {
+            box-shadow: 0 15px 30px rgba(var(--color-accent2), 0.15);
+            border-color: var(--accent2);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--muted);
+        }
+
+        /* Input Focus Glow */
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(var(--color-accent), 0.2);
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-textcolor bg-bg relative selection:bg-accent selection:text-bg">
+
+    <!-- Visual Effects -->
+    <div class="noise-overlay"></div>
+    <div class="custom-cursor hidden md:block" id="cursor"></div>
+
+    <!-- 1. NAVBAR -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 flex justify-between items-center border-b border-transparent">
+        <a href="#" class="font-serif text-3xl font-bold text-textcolor tracking-tighter cursor-hover">RJ.</a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-muted">
+            <a href="#about" class="nav-link cursor-hover hover:text-textcolor transition-colors">About</a>
+            <a href="#skills" class="nav-link cursor-hover hover:text-textcolor transition-colors">Skills</a>
+            <a href="#experience" class="nav-link cursor-hover hover:text-textcolor transition-colors">Experience</a>
+            <a href="#projects" class="nav-link cursor-hover hover:text-textcolor transition-colors">Projects</a>
+            <a href="#contact" class="nav-link cursor-hover hover:text-textcolor transition-colors">Contact</a>
+            
+            <button id="theme-toggle" class="text-textcolor hover:text-accent transition-colors cursor-hover p-2">
+                <iconify-icon icon="lucide:sun" id="theme-icon" width="20"></iconify-icon>
+            </button>
+        </div>
+
+        <a href="#contact"
+            class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-semibold text-bg bg-accent rounded-full hover:bg-white transition-colors cursor-hover magnetic-btn">
+            Hire Me <iconify-icon icon="lucide:arrow-right" class="ml-1"></iconify-icon>
+        </a>
+
+        <!-- Mobile Menu Btn & Theme Toggle -->
+        <div class="md:hidden flex items-center space-x-4">
+            <button id="mobile-theme-toggle" class="text-textcolor hover:text-accent transition-colors cursor-hover p-2">
+                <iconify-icon icon="lucide:sun" id="mobile-theme-icon" width="20"></iconify-icon>
+            </button>
+            <button class="text-textcolor cursor-hover" id="mobile-menu-btn">
+                <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-bg/95 backdrop-blur-md z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="flex flex-col space-y-8 text-2xl font-serif text-center">
+            <a href="#about" class="mobile-link text-muted hover:text-accent transition-colors">About</a>
+            <a href="#skills" class="mobile-link text-muted hover:text-accent transition-colors">Skills</a>
+            <a href="#experience" class="mobile-link text-muted hover:text-accent transition-colors">Experience</a>
+            <a href="#projects" class="mobile-link text-muted hover:text-accent transition-colors">Projects</a>
+            <a href="#contact" class="mobile-link text-muted hover:text-accent transition-colors">Contact</a>
+        </div>
+    </div>
+
+    <!-- 2. HERO -->
+    <section id="hero"
+        class="relative min-h-screen flex items-center justify-center px-6 md:px-12 pt-20 overflow-hidden">
+        <div class="hero-gradient"></div>
+
+        <div class="text-center z-10 max-w-5xl mx-auto flex flex-col items-center">
+            <div
+                class="reveal inline-flex items-center px-3 py-1 mb-6 text-xs font-medium text-accent border border-accent rounded-full bg-accent/5 backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-accent animate-pulse mr-2"></span>
+                ✦ Available for Opportunities
+            </div>
+
+            <h1 id="hero-title"
+                class="reveal font-serif text-5xl md:text-7xl lg:text-8xl italic font-medium leading-tight mb-4 tracking-tight">
+                Rutuja Vilas Jadhav
+            </h1>
+
+            <div class="reveal h-8 md:h-12 mb-6">
+                <span id="typed-text" class="text-xl md:text-3xl font-light text-textcolor typing-cursor"></span>
+            </div>
+
+            <p class="reveal text-muted md:text-lg max-w-lg mx-auto mb-10 font-light">
+                I build secure, intelligent web experiences that perform.
+            </p>
+
+            <div class="reveal flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#projects"
+                    class="magnetic-btn cursor-hover px-8 py-3 bg-accent text-bg font-semibold rounded-full hover:scale-105 transition-transform duration-300">
+                    View My Work
+                </a>
+                <a href="resume.pdf" download
+                    class="magnetic-btn cursor-hover px-8 py-3 border border-textcolor text-textcolor font-medium rounded-full hover:bg-textcolor hover:text-bg transition-colors duration-300">
+                    Download Resume
+                </a>
+            </div>
+        </div>
+
+        <a href="#about"
+            class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-muted hover:text-accent transition-colors cursor-hover animate-bounce-down">
+            <iconify-icon icon="lucide:chevron-down" width="32"></iconify-icon>
+        </a>
+    </section>
+
+    <!-- 3. MARQUEE / TICKER -->
+    <div class="w-full bg-card border-y border-bordercolor overflow-hidden py-4 flex whitespace-nowrap relative">
+        <div class="animate-marquee flex marquee-container text-2xl font-serif text-muted tracking-widest">
+            <span class="mx-4">Java</span><span class="mx-4">·</span>
+            <span class="mx-4">Django</span><span class="mx-4">·</span>
+            <span class="mx-4">Python</span><span class="mx-4">·</span>
+            <span class="mx-4">REST API</span><span class="mx-4">·</span>
+            <span class="mx-4">React.js</span><span class="mx-4">·</span>
+            <span class="mx-4">MySQL</span><span class="mx-4">·</span>
+            <span class="mx-4">NLP</span><span class="mx-4">·</span>
+            <span class="mx-4">Spring Boot</span><span class="mx-4">·</span>
+            <span class="mx-4">Git</span><span class="mx-4">·</span>
+            <!-- duplicate for infinite scroll -->
+            <span class="mx-4">Java</span><span class="mx-4">·</span>
+            <span class="mx-4">Django</span><span class="mx-4">·</span>
+            <span class="mx-4">Python</span><span class="mx-4">·</span>
+            <span class="mx-4">REST API</span><span class="mx-4">·</span>
+            <span class="mx-4">React.js</span><span class="mx-4">·</span>
+            <span class="mx-4">MySQL</span><span class="mx-4">·</span>
+            <span class="mx-4">NLP</span><span class="mx-4">·</span>
+            <span class="mx-4">Spring Boot</span><span class="mx-4">·</span>
+            <span class="mx-4">Git</span><span class="mx-4">·</span>
+        </div>
+    </div>
+
+    <!-- 4. ABOUT -->
+    <section id="about" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+            <div class="lg:col-span-7 space-y-8">
+                <div class="reveal text-accent text-xs tracking-[0.2em] font-medium uppercase">
+                    — 01 / About
+                </div>
+                <h2 class="reveal font-serif text-4xl md:text-5xl lg:text-6xl leading-tight">
+                    I build things that matter, and make them look like it too.
+                </h2>
+                <p class="reveal text-muted text-lg leading-relaxed font-light">
+                    Information Technology undergraduate with hands-on internship experience as a Java Developer and
+                    Full Stack Web Developer. Proficient in Core Java, Spring Boot, REST APIs, Django, Python, and
+                    MySQL. Passionate about building secure, high-performance applications with clean architecture.
+                </p>
+                <div class="reveal flex flex-wrap gap-6 pt-4">
+                    <div class="bg-card border border-bordercolor px-6 py-4 rounded-xl">
+                        <div class="text-3xl font-serif text-accent mb-1">8.77</div>
+                        <div class="text-xs text-muted uppercase tracking-wider">CGPA</div>
+                    </div>
+                    <div class="bg-card border border-bordercolor px-6 py-4 rounded-xl">
+                        <div class="text-3xl font-serif text-accent mb-1">2</div>
+                        <div class="text-xs text-muted uppercase tracking-wider">Internships</div>
+                    </div>
+                    <div class="bg-card border border-bordercolor px-6 py-4 rounded-xl">
+                        <div class="text-3xl font-serif text-accent mb-1">3+</div>
+                        <div class="text-xs text-muted uppercase tracking-wider">Projects</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 reveal">
+                <div
+                    class="relative bg-card border border-bordercolor rounded-2xl flex flex-col items-center justify-center aspect-square group cursor-hover overflow-hidden">
+                    <!-- Google Maps Embed Background -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30138.318285514115!2d74.1843236!3d19.570188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdd007bbec3644f%3A0xc47e33552ddbc0ed!2sSangamner%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1714413988581!5m2!1sen!2sin"
+                        width="100%" height="100%"
+                        style="border:0; position:absolute; top:0; left:0; filter: grayscale(100%) invert(90%) contrast(1.2) opacity(0.5);"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                    <!-- Overlay -->
+                    <div
+                        class="absolute inset-0 bg-bg/60 group-hover:bg-bg/40 transition-colors duration-500 pointer-events-none z-0">
+                    </div>
+
+                    <!-- Corner Accents -->
+                    <div
+                        class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-accent rounded-tl-2xl opacity-50 group-hover:opacity-100 transition-opacity z-10">
+                    </div>
+                    <div
+                        class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-accent rounded-tr-2xl opacity-50 group-hover:opacity-100 transition-opacity z-10">
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-accent rounded-bl-2xl opacity-50 group-hover:opacity-100 transition-opacity z-10">
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-accent rounded-br-2xl opacity-50 group-hover:opacity-100 transition-opacity z-10">
+                    </div>
+
+                    <div
+                        class="font-serif text-8xl md:text-9xl text-textcolor opacity-90 group-hover:text-accent transition-colors duration-500 z-10 drop-shadow-2xl">
+                        RJ</div>
+
+                    <div
+                        class="absolute bottom-6 flex items-center space-x-2 bg-card/90 backdrop-blur-sm px-4 py-2 rounded-full border border-bordercolor text-sm z-10">
+                        <span>Sangamner, Maharashtra, India</span> <span>📍</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SKILLS -->
+    <section id="skills" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-bordercolor/50">
+        <div class="reveal text-accent text-xs tracking-[0.2em] font-medium uppercase mb-6">
+            — 02 / Arsenal
+        </div>
+        <h2 class="reveal font-serif text-4xl md:text-5xl mb-16">
+            Technologies I wield.
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="reveal skill-card bg-card border border-bordercolor rounded-xl p-6 cursor-hover group">
+                <div class="text-accent mb-4 group-hover:scale-110 transition-transform origin-left">
+                    <iconify-icon icon="lucide:code-2" width="32"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-medium mb-4">Languages</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Java</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Python</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">C</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">C++</span>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="reveal skill-card bg-card border border-bordercolor rounded-xl p-6 cursor-hover group"
+                style="transition-delay: 50ms;">
+                <div class="text-accent mb-4 group-hover:scale-110 transition-transform origin-left">
+                    <iconify-icon icon="lucide:server" width="32"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-medium mb-4">Backend</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Spring
+                        Boot</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Django</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">REST
+                        API</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">MVC</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">CRUD</span>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="reveal skill-card bg-card border border-bordercolor rounded-xl p-6 cursor-hover group"
+                style="transition-delay: 100ms;">
+                <div class="text-accent mb-4 group-hover:scale-110 transition-transform origin-left">
+                    <iconify-icon icon="lucide:layout" width="32"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-medium mb-4">Frontend</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">HTML5</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">CSS3</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">JavaScript</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">React.js</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Responsive</span>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="reveal skill-card bg-card border border-bordercolor rounded-xl p-6 cursor-hover group"
+                style="transition-delay: 150ms;">
+                <div class="text-accent mb-4 group-hover:scale-110 transition-transform origin-left">
+                    <iconify-icon icon="lucide:database" width="32"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-medium mb-4">Database</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">MySQL</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">MongoDB</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Optimization</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Schema</span>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="reveal skill-card bg-card border border-bordercolor rounded-xl p-6 cursor-hover group"
+                style="transition-delay: 200ms;">
+                <div class="text-accent mb-4 group-hover:scale-110 transition-transform origin-left">
+                    <iconify-icon icon="lucide:brain-circuit" width="32"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-medium mb-4">AI / ML</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">NLP</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Keyword
+                        Extraction</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Text
+                        Parsing</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Predictive
+                        Modeling</span>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="reveal skill-card bg-card border border-bordercolor rounded-xl p-6 cursor-hover group"
+                style="transition-delay: 250ms;">
+                <div class="text-accent mb-4 group-hover:scale-110 transition-transform origin-left">
+                    <iconify-icon icon="lucide:shield-check" width="32"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-medium mb-4">Security</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">RBAC</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Sessions</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Auth</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">OAuth</span>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="reveal skill-card bg-card border border-bordercolor rounded-xl p-6 cursor-hover group"
+                style="transition-delay: 300ms;">
+                <div class="text-accent mb-4 group-hover:scale-110 transition-transform origin-left">
+                    <iconify-icon icon="lucide:wrench" width="32"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-medium mb-4">Tools</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Git</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">GitHub</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">VS
+                        Code</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Eclipse</span>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="reveal skill-card bg-card border border-bordercolor rounded-xl p-6 cursor-hover group"
+                style="transition-delay: 350ms;">
+                <div class="text-accent mb-4 group-hover:scale-110 transition-transform origin-left">
+                    <iconify-icon icon="lucide:lightbulb" width="32"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-medium mb-4">Concepts</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">OOP</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">DSA</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">DBMS</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Agile</span>
+                </div>
+            </div>
+
+            <!-- Filler Card -->
+            <div class="reveal bg-bg border border-bordercolor border-dashed rounded-xl p-6 flex items-center justify-center text-muted opacity-50"
+                style="transition-delay: 400ms;">
+                <div class="text-center">
+                    <iconify-icon icon="lucide:more-horizontal" width="32" class="mb-2"></iconify-icon>
+                    <p class="text-xs uppercase tracking-widest">Always Learning</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. EXPERIENCE -->
+    <section id="experience" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-bordercolor/50">
+        <div class="reveal text-accent text-xs tracking-[0.2em] font-medium uppercase mb-6">
+            — 03 / Experience
+        </div>
+        <h2 class="reveal font-serif text-4xl md:text-5xl mb-16">
+            Where I've worked.
+        </h2>
+
+        <div class="relative pl-8 md:pl-0">
+            <!-- Vertical Line -->
+            <div
+                class="absolute left-[11px] md:left-1/2 top-0 bottom-0 w-[2px] bg-bordercolor transform md:-translate-x-1/2">
+            </div>
+
+            <!-- Entry 1 -->
+            <div class="reveal mb-16 relative md:w-1/2 md:pr-12 md:ml-0 md:text-right group cursor-hover">
+                <div
+                    class="absolute left-[-37px] md:left-auto md:right-[-33px] top-1 w-6 h-6 rounded-full bg-bg border-4 border-accent timeline-dot z-10 transition-transform group-hover:scale-125">
+                </div>
+                <div
+                    class="bg-card border border-bordercolor p-6 md:p-8 rounded-2xl group-hover:border-accent transition-colors">
+                    <div class="text-accent text-sm font-medium mb-1">Dec 2025 – Jan 2026 | Remote, India</div>
+                    <h3 class="text-2xl font-serif text-textcolor mb-1">Java Developer Intern</h3>
+                    <div class="text-muted text-lg mb-4">Code Alpha</div>
+                    <ul class="space-y-3 text-muted text-sm md:text-base font-light text-left md:text-right">
+                        <li>· Developed backend modules in Core Java and OOP, reducing technical debt by 25%</li>
+                        <li>· Designed RESTful APIs with CRUD operations, improving response efficiency by 20%</li>
+                        <li>· Enforced SDLC best practices with Git branching and code review workflows</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Entry 2 -->
+            <div class="reveal relative md:w-1/2 md:pl-12 md:ml-auto group cursor-hover">
+                <div
+                    class="absolute left-[-37px] md:left-[-11px] top-1 w-6 h-6 rounded-full bg-bg border-4 border-accent timeline-dot z-10 transition-transform group-hover:scale-125">
+                </div>
+                <div
+                    class="bg-card border border-bordercolor p-6 md:p-8 rounded-2xl group-hover:border-accent transition-colors">
+                    <div class="text-accent text-sm font-medium mb-1">January 2026 | Remote, India</div>
+                    <h3 class="text-2xl font-serif text-textcolor mb-1">Full Stack Web Development Intern</h3>
+                    <div class="text-muted text-lg mb-4">Edunet Foundation</div>
+                    <ul class="space-y-3 text-muted text-sm md:text-base font-light">
+                        <li>· Built AI-Based Skill Meter app using Python, Django, HTML5, CSS3, JS — reduced manual
+                            evaluation by 40%</li>
+                        <li>· Designed 10+ RESTful APIs for structured frontend-to-backend communication</li>
+                        <li>· Implemented RBAC with secure authentication supporting multiple user roles</li>
+                        <li>· Designed MySQL schema with 8+ tables, improving data retrieval speed by 35%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PROJECTS -->
+    <section id="projects" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-bordercolor/50">
+        <div class="reveal text-accent text-xs tracking-[0.2em] font-medium uppercase mb-6">
+            — 04 / Works
+        </div>
+        <h2 class="reveal font-serif italic text-4xl md:text-5xl mb-16">
+            Selected Projects.
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Card 1: Featured -->
+            <div
+                class="reveal project-card featured col-span-1 md:col-span-2 bg-card border-t-2 border-t-accent border-x border-b border-bordercolor rounded-2xl p-8 md:p-12 cursor-hover">
+                <div class="flex flex-col md:flex-row justify-between md:items-center mb-6">
+                    <div>
+                        <div class="text-accent text-sm tracking-widest uppercase mb-2">Featured Project</div>
+                        <h3 class="text-3xl md:text-4xl font-serif text-textcolor">AI Skill Meter</h3>
+                    </div>
+                    <div class="text-muted font-serif text-xl mt-4 md:mt-0">2026</div>
+                </div>
+                <p class="text-muted text-lg mb-8 max-w-3xl font-light">
+                    Full stack resume analyzer using AI models and NLP keyword extraction (90% accuracy). Served 50+
+                    test profiles. Reduced manual screening by 60%. 10+ API endpoints with RBAC.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Python</span>
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Django</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">MySQL</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">NLP</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">REST
+                        API</span>
+                </div>
+                <a href="#" class="inline-flex items-center text-textcolor hover:text-accent transition-colors">
+                    View Project <iconify-icon icon="lucide:arrow-up-right" class="ml-1" width="20"></iconify-icon>
+                </a>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="reveal project-card secondary bg-card border border-bordercolor rounded-2xl p-8 cursor-hover">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-2xl font-serif text-textcolor leading-tight pr-4">Conversational AI & Predictive
+                        Analytics Platform</h3>
+                    <div class="text-muted font-serif shrink-0">2025</div>
+                </div>
+                <p class="text-muted mb-8 font-light text-sm md:text-base">
+                    NLP pipelines for behavioral analysis and risk pattern detection. Improved system performance and
+                    data retrieval speed by 30%.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                    <span
+                        class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Python</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">NLP</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Predictive
+                        Modeling</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">MySQL</span>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="reveal project-card bg-card border border-bordercolor rounded-2xl p-8 cursor-hover">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-2xl font-serif text-textcolor leading-tight pr-4">Automatic Street Light System</h3>
+                    <div class="text-muted font-serif shrink-0">2024</div>
+                </div>
+                <p class="text-muted mb-8 font-light text-sm md:text-base">
+                    LDR sensor-based ambient light detection system. Automated energy-efficient lighting with stable
+                    circuit logic across varying conditions.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Embedded
+                        Systems</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">LDR
+                        Sensor</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">Circuit
+                        Design</span>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div
+                class="reveal project-card bg-card border border-bordercolor rounded-2xl p-8 cursor-hover md:col-span-2 lg:col-span-1">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-2xl font-serif text-textcolor leading-tight pr-4">Personal Portfolio</h3>
+                    <div class="text-muted font-serif shrink-0">2026</div>
+                </div>
+                <p class="text-muted mb-8 font-light text-sm md:text-base">
+                    Personal portfolio website about myself and all skill work experience, etc. Resume platform
+                    showcasing projects and contact details.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">HTML</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">CSS</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">JS</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-bg border border-bordercolor text-muted">React</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8. CERTIFICATIONS -->
+    <section id="certifications" class="py-24 px-6 md:px-12 max-w-4xl mx-auto border-t border-bordercolor/50">
+        <div class="reveal text-accent text-xs tracking-[0.2em] font-medium uppercase mb-6 text-center">
+            — 05 / Credentials
+        </div>
+        <h2 class="reveal font-serif text-4xl md:text-5xl mb-12 text-center">
+            Certified & Verified.
+        </h2>
+
+        <div class="space-y-4">
+            <!-- Cert 1 -->
+            <div
+                class="reveal flex items-center justify-between p-4 border-b border-bordercolor hover:bg-card transition-colors cursor-hover rounded-lg group">
+                <div class="flex items-center space-x-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg transition-colors">
+                        <iconify-icon icon="lucide:check" width="16"></iconify-icon>
+                    </div>
+                    <span class="text-textcolor font-medium md:text-lg">Java Programming</span>
+                </div>
+                <span class="text-xs text-muted border border-bordercolor px-2 py-1 rounded">NPTEL</span>
+            </div>
+
+            <!-- Cert 2 -->
+            <div
+                class="reveal flex items-center justify-between p-4 border-b border-bordercolor hover:bg-card transition-colors cursor-hover rounded-lg group">
+                <div class="flex items-center space-x-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg transition-colors">
+                        <iconify-icon icon="lucide:check" width="16"></iconify-icon>
+                    </div>
+                    <span class="text-textcolor font-medium md:text-lg">Foundations of Cloud, IoT, and Edge ML</span>
+                </div>
+            </div>
+
+            <!-- Cert 3 -->
+            <div
+                class="reveal flex items-center justify-between p-4 border-b border-bordercolor hover:bg-card transition-colors cursor-hover rounded-lg group">
+                <div class="flex items-center space-x-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg transition-colors">
+                        <iconify-icon icon="lucide:check" width="16"></iconify-icon>
+                    </div>
+                    <span class="text-textcolor font-medium md:text-lg">AI-ML Virtual Internship</span>
+                </div>
+                <span class="text-xs text-muted border border-bordercolor px-2 py-1 rounded">EduSkills, AICTE</span>
+            </div>
+
+            <!-- Cert 4 -->
+            <div
+                class="reveal flex items-center justify-between p-4 border-b border-bordercolor hover:bg-card transition-colors cursor-hover rounded-lg group">
+                <div class="flex items-center space-x-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg transition-colors">
+                        <iconify-icon icon="lucide:check" width="16"></iconify-icon>
+                    </div>
+                    <span class="text-textcolor font-medium md:text-lg">Java Full Stack Developer</span>
+                </div>
+                <span class="text-xs text-muted border border-bordercolor px-2 py-1 rounded">EduSkills, AICTE</span>
+            </div>
+
+            <!-- Cert 5 -->
+            <div
+                class="reveal flex items-center justify-between p-4 border-b border-bordercolor hover:bg-card transition-colors cursor-hover rounded-lg group">
+                <div class="flex items-center space-x-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg transition-colors">
+                        <iconify-icon icon="lucide:check" width="16"></iconify-icon>
+                    </div>
+                    <span class="text-textcolor font-medium md:text-lg">Python Full Stack Developer</span>
+                </div>
+                <span class="text-xs text-muted border border-bordercolor px-2 py-1 rounded">EduSkills, AICTE</span>
+            </div>
+
+            <!-- Cert 6 -->
+            <div
+                class="reveal flex items-center justify-between p-4 border-b border-bordercolor hover:bg-card transition-colors cursor-hover rounded-lg group">
+                <div class="flex items-center space-x-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg transition-colors">
+                        <iconify-icon icon="lucide:check" width="16"></iconify-icon>
+                    </div>
+                    <span class="text-textcolor font-medium md:text-lg">JobReady Employability Skills</span>
+                </div>
+                <span class="text-xs text-muted border border-bordercolor px-2 py-1 rounded">Wadhwani Foundation</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. CONTACT -->
+    <section id="contact" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-bordercolor/50">
+        <div class="reveal text-accent text-xs tracking-[0.2em] font-medium uppercase mb-6 text-center">
+            — 06 / Contact
+        </div>
+        <h2 class="reveal font-serif text-5xl md:text-6xl mb-4 text-center">
+            Let's build something remarkable.
+        </h2>
+        <p class="reveal text-muted text-center max-w-2xl mx-auto mb-16 font-light">
+            Open to internships, collaborations, and full-time opportunities.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Left: Info -->
+            <div class="space-y-6 reveal">
+                <a href="mailto:rutuj334@gmail.com"
+                    class="flex items-center p-6 bg-card border border-bordercolor rounded-xl hover:border-accent transition-colors cursor-hover group">
+                    <div
+                        class="w-12 h-12 rounded-full bg-bg border border-bordercolor flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                        <iconify-icon icon="lucide:mail" width="20"></iconify-icon>
+                    </div>
+                    <div class="ml-6">
+                        <div class="text-sm text-muted mb-1">Email</div>
+                        <div class="text-lg text-textcolor font-medium">rutuj334@gmail.com</div>
+                    </div>
+                </a>
+
+                <a href="tel:+918329208736"
+                    class="flex items-center p-6 bg-card border border-bordercolor rounded-xl hover:border-accent transition-colors cursor-hover group">
+                    <div
+                        class="w-12 h-12 rounded-full bg-bg border border-bordercolor flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                        <iconify-icon icon="lucide:phone" width="20"></iconify-icon>
+                    </div>
+                    <div class="ml-6">
+                        <div class="text-sm text-muted mb-1">Phone</div>
+                        <div class="text-lg text-textcolor font-medium">+91-8329208736</div>
+                    </div>
+                </a>
+
+                <a href="https://linkedin.com/in/rutuja-jadhav" target="_blank"
+                    class="flex items-center p-6 bg-card border border-bordercolor rounded-xl hover:border-accent transition-colors cursor-hover group">
+                    <div
+                        class="w-12 h-12 rounded-full bg-bg border border-bordercolor flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                        <iconify-icon icon="lucide:linkedin" width="20"></iconify-icon>
+                    </div>
+                    <div class="ml-6">
+                        <div class="text-sm text-muted mb-1">LinkedIn</div>
+                        <div class="text-lg text-textcolor font-medium">linkedin.com/in/rutuja-jadhav</div>
+                    </div>
+                </a>
+
+                <div class="flex items-center p-6 bg-card border border-bordercolor rounded-xl cursor-hover">
+                    <div
+                        class="w-12 h-12 rounded-full bg-bg border border-bordercolor flex items-center justify-center text-accent">
+                        <iconify-icon icon="lucide:map-pin" width="20"></iconify-icon>
+                    </div>
+                    <div class="ml-6">
+                        <div class="text-sm text-muted mb-1">Location</div>
+                        <div class="text-lg text-textcolor font-medium">Sangamner, Maharashtra, India</div>
+                    </div>
+                </div>
+
+                <!-- Google Maps Embed -->
+                <div class="w-full h-48 rounded-xl overflow-hidden border border-bordercolor mt-6">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15024.162796248384!2d74.19507935!3d19.5740449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdd007bbec3644f%3A0xc47e33552ddbc0ed!2sSangamner%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1714413988581!5m2!1sen!2sin"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="reveal bg-card border border-bordercolor rounded-2xl p-8">
+                <form class="space-y-6" action="mailto:rutuj334@gmail.com" method="post" enctype="text/plain">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-muted mb-2">Name</label>
+                        <input type="text" id="name" name="Name"
+                            class="w-full bg-bg border border-bordercolor rounded-lg px-4 py-3 text-textcolor transition-all cursor-hover"
+                            placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-muted mb-2">Email</label>
+                        <input type="email" id="email" name="Email"
+                            class="w-full bg-bg border border-bordercolor rounded-lg px-4 py-3 text-textcolor transition-all cursor-hover"
+                            placeholder="john@example.com" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-muted mb-2">Message</label>
+                        <textarea id="message" name="Message" rows="4"
+                            class="w-full bg-bg border border-bordercolor rounded-lg px-4 py-3 text-textcolor transition-all cursor-hover resize-none"
+                            placeholder="Hello, let's work together..." required></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-accent text-bg font-semibold py-4 rounded-lg hover:bg-white transition-colors cursor-hover magnetic-btn flex justify-center items-center">
+                        Send Message <iconify-icon icon="lucide:arrow-right" class="ml-2" width="20"></iconify-icon>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FOOTER -->
+    <footer class="relative py-12 overflow-hidden border-t border-bordercolor">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
+            <h2 class="text-[10vw] font-serif font-bold text-textcolor opacity-[0.03] whitespace-nowrap">RUTUJA JADHAV
+            </h2>
+        </div>
+
+        <div
+            class="relative z-10 container mx-auto px-6 flex flex-col items-center justify-center text-sm text-muted text-center space-y-4">
+            <p>© 2026 Rutuja Vilas Jadhav · Designed with intent.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-accent transition-colors cursor-hover">LinkedIn</a>
+                <a href="#" class="hover:text-accent transition-colors cursor-hover">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // 1. Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorHoverElements = document.querySelectorAll('.cursor-hover, a, button, input, textarea');
+
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Lerp function for smooth following
+        function animateCursor() {
+            let distX = mouseX - cursorX;
+            let distY = mouseY - cursorY;
+
+            cursorX += distX * 0.2;
+            cursorY += distY * 0.2;
+
+            if (cursor) {
+                cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
+            }
+
+            requestAnimationFrame(animateCursor);
+        }
+
+        // Only run custom cursor on non-touch devices
+        if (window.matchMedia("(pointer: fine)").matches) {
+            animateCursor();
+
+            cursorHoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+            });
+        }
+
+        // 2. Scroll Reveal with Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // 3. Typing Animation
+        const roles = ["Full Stack Web Developer", "Java Backend Engineer", "AI Application Builder"];
+        const typedTextSpan = document.getElementById("typed-text");
+
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        const typingSpeed = 120;
+        const deletingSpeed = 80;
+        const pauseTime = 3000;
+
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+
+            if (isDeleting) {
+                charIndex--;
+            } else {
+                charIndex++;
+            }
+
+            typedTextSpan.textContent = currentRole.substring(0, charIndex);
+
+            let speed = isDeleting ? deletingSpeed : typingSpeed;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                speed = pauseTime;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                speed = 500; // small pause before next word
+            }
+
+            setTimeout(typeEffect, speed);
+        }
+
+        // START ONLY ONCE
+        document.addEventListener("DOMContentLoaded", () => {
+            typeEffect();
+        });
+
+        // 4. Navbar & Active Link
+        const navbar = document.getElementById('navbar');
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            // Navbar Frosted Glass
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Active Link Highlighting
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current) && current !== '') {
+                    link.classList.add('active');
+                }
+            });
+
+            // Hero Parallax text
+            const heroTitle = document.getElementById('hero-title');
+            if (window.scrollY < window.innerHeight) {
+                heroTitle.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+            }
+        });
+
+        // 8. Magnetic Buttons
+        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                // push toward cursor
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0px, 0px)';
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                mobileMenuBtn.innerHTML = '<iconify-icon icon="lucide:x" width="24"></iconify-icon>';
+            } else {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                mobileMenuBtn.innerHTML = '<iconify-icon icon="lucide:menu" width="24"></iconify-icon>';
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                mobileMenuBtn.innerHTML = '<iconify-icon icon="lucide:menu" width="24"></iconify-icon>';
+            });
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            
+            // Save preference
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            
+            // Update icons
+            if (isLight) {
+                themeIcon.setAttribute('icon', 'lucide:moon');
+                mobileThemeIcon.setAttribute('icon', 'lucide:moon');
+            } else {
+                themeIcon.setAttribute('icon', 'lucide:sun');
+                mobileThemeIcon.setAttribute('icon', 'lucide:sun');
+            }
+        }
+
+        // Initialize theme from local storage
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+            themeIcon.setAttribute('icon', 'lucide:moon');
+            mobileThemeIcon.setAttribute('icon', 'lucide:moon');
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+    </script>
+</body>
+
+</html>
